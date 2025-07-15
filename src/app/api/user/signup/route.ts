@@ -8,7 +8,8 @@ connectDB();
 
 export const POST = async (req: NextRequest) => {
     try{
-        const { username, email, password } = req.body;
+        const reqbody = await req.json(); 
+        const { username, email, password }:any = reqbody;
         if (!username || !email || !password) {
             return NextResponse.json({ error: "All fields are required" }, { status: 400 });
         }
@@ -32,7 +33,7 @@ export const POST = async (req: NextRequest) => {
 
         await sendEmail({
             email,
-            emailtype: "Verification",
+            emailtype: "VERIFY",
             userId: savedUser._id
         });
         return NextResponse.json({ message: "User created successfully" }, { status: 201 });
