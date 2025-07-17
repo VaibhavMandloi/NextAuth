@@ -33,7 +33,7 @@ export const POST = async (req: NextRequest) => {
 
         await sendEmail({
             email,
-            emailtype: "VERIFY",
+            emailType: "VERIFY",
             userId: savedUser._id
         });
         return NextResponse.json({ message: "User created successfully" }, { status: 201 });
